@@ -151,6 +151,7 @@ sensor:
     sensors:
       - name: PV1 Voltage
         id: v_in_1
+        entity_category: "diagnostic"
         unit_of_measurement: V
         accuracy_decimals: 2
         icon: "mdi:lightning-bolt-outline"
@@ -165,6 +166,7 @@ sensor:
 
       - name: PV2 Voltage
         id: v_in_2
+        entity_category: "diagnostic"
         unit_of_measurement: V
         accuracy_decimals: 2
         icon: "mdi:lightning-bolt-outline"
@@ -179,6 +181,7 @@ sensor:
 
       - name: PV1 Current
         id: i_in_1
+        entity_category: "diagnostic"
         unit_of_measurement: A
         accuracy_decimals: 2
         icon: "mdi:current-ac"
@@ -193,6 +196,7 @@ sensor:
 
       - name: PV2 Current
         id: i_in_2
+        entity_category: "diagnostic"
         unit_of_measurement: A
         accuracy_decimals: 2
         icon: "mdi:current-ac"
@@ -263,6 +267,7 @@ sensor:
 
       - name: Peak Power Max
         id: power_peak_max
+        entity_category: "diagnostic"
         unit_of_measurement: W
         accuracy_decimals: 0
         icon: "mdi:solar-power"
@@ -291,6 +296,7 @@ sensor:
 
       - name: Booster Temperature
         id: booster_temp
+        entity_category: "diagnostic"
         unit_of_measurement: "°C"
         accuracy_decimals: 2
         icon: "mdi:thermometer"
@@ -333,6 +339,7 @@ sensor:
 
       - name: Energy This Month
         id: cumulated_energy_month
+        entity_category: "diagnostic"
         unit_of_measurement: "Wh"
         accuracy_decimals: 0
         icon: "mdi:car-battery"
@@ -347,6 +354,7 @@ sensor:
 
       - name: Energy This Year
         id: cumulated_energy_year
+        entity_category: "diagnostic"
         unit_of_measurement: "Wh"
         accuracy_decimals: 0
         icon: "mdi:car-battery"
@@ -361,6 +369,7 @@ sensor:
 
       - name: Energy All Time
         id: cumulated_energy_total
+        entity_category: "diagnostic"
         unit_of_measurement: "Wh"
         accuracy_decimals: 0
         icon: "mdi:car-battery"
@@ -375,6 +384,7 @@ sensor:
 
       - name: Grid Voltage
         id: grid_voltage
+        entity_category: "diagnostic"
         unit_of_measurement: V
         accuracy_decimals: 2
         icon: "mdi:flash"
@@ -389,6 +399,7 @@ sensor:
 
       - name: Grid Current
         id: grid_current
+        entity_category: "diagnostic"
         unit_of_measurement: A
         accuracy_decimals: 2
         icon: "mdi:current-ac"
@@ -403,6 +414,7 @@ sensor:
 
       - name: Grid Power
         id: grid_power
+        entity_category: "diagnostic"
         unit_of_measurement: W
         accuracy_decimals: 0
         icon: "mdi:flash"
@@ -417,6 +429,7 @@ sensor:
 
       - name: Frequency
         id: frequency
+        entity_category: "diagnostic"
         unit_of_measurement: Hz
         accuracy_decimals: 2
         icon: "mdi:sine-wave"
@@ -431,6 +444,7 @@ sensor:
 
       - name: Bulk Voltage
         id: v_bulk
+        entity_category: "diagnostic"
         unit_of_measurement: V
         accuracy_decimals: 2
         icon: "mdi:flash"
@@ -445,6 +459,7 @@ sensor:
 
       - name: DC-DC Grid Voltage
         id: dc_dc_grid_voltage
+        entity_category: "diagnostic"
         unit_of_measurement: V
         accuracy_decimals: 2
         icon: "mdi:flash"
@@ -459,6 +474,7 @@ sensor:
 
       - name: DC-DC Grid Frequency
         id: dc_dc_grid_frequency
+        entity_category: "diagnostic"
         unit_of_measurement: Hz
         accuracy_decimals: 2
         icon: "mdi:sine-wave"
@@ -473,6 +489,7 @@ sensor:
 
       - name: Isolation Resistance
         id: isolation_resistance
+        entity_category: "diagnostic"
         unit_of_measurement: Ohm
         accuracy_decimals: 2
         icon: "mdi:resistor"
@@ -487,6 +504,7 @@ sensor:
 
       - name: DC-DC V Bulk
         id: dc_dc_v_bulk
+        entity_category: "diagnostic"
         unit_of_measurement: V
         accuracy_decimals: 2
         icon: "mdi:flash"
@@ -501,6 +519,7 @@ sensor:
 
       - name: Average Grid Voltage
         id: average_grid_voltage
+        entity_category: "diagnostic"
         unit_of_measurement: V
         accuracy_decimals: 2
         icon: "mdi:flash"
@@ -515,6 +534,7 @@ sensor:
 
       - name: Bulk Mid Voltage
         id: v_bulk_mid
+        entity_category: "diagnostic"
         unit_of_measurement: V
         accuracy_decimals: 2
         icon: "mdi:flash"
@@ -529,6 +549,7 @@ sensor:
 
       - name: Grid Voltage Neutral
         id: grid_voltage_neutral
+        entity_category: "diagnostic"
         unit_of_measurement: V
         accuracy_decimals: 2
         icon: "mdi:flash"
@@ -543,6 +564,7 @@ sensor:
 
       - name: Wind Generator Frequency
         id: wind_generator_frequency
+        entity_category: "diagnostic"
         unit_of_measurement: Hz
         accuracy_decimals: 2
         icon: "mdi:sine-wave"
@@ -557,6 +579,7 @@ sensor:
 
       - name: Grid Voltage Neutral Phase
         id: grid_voltage_neutral_phase
+        entity_category: "diagnostic"
         unit_of_measurement: V
         accuracy_decimals: 2
         icon: "mdi:flash"
@@ -571,6 +594,7 @@ sensor:
 
       - name: Grid Current Phase R
         id: grid_current_phase_r
+        entity_category: "diagnostic"
         unit_of_measurement: A
         accuracy_decimals: 2
         icon: "mdi:current-ac"
@@ -585,6 +609,7 @@ sensor:
 
       - name: Grid Current Phase S
         id: grid_current_phase_s
+        entity_category: "diagnostic"
         unit_of_measurement: A
         accuracy_decimals: 2
         icon: "mdi:current-ac"
@@ -599,6 +624,7 @@ sensor:
 
       - name: Grid Current Phase T
         id: grid_current_phase_t
+        entity_category: "diagnostic"
         unit_of_measurement: A
         accuracy_decimals: 2
         icon: "mdi:current-ac"
@@ -613,6 +639,7 @@ sensor:
 
       - name: Frequency Phase R
         id: frequency_phase_r
+        entity_category: "diagnostic"
         unit_of_measurement: Hz
         accuracy_decimals: 2
         icon: "mdi:sine-wave"
@@ -627,6 +654,7 @@ sensor:
 
       - name: Frequency Phase S
         id: frequency_phase_s
+        entity_category: "diagnostic"
         unit_of_measurement: Hz
         accuracy_decimals: 2
         icon: "mdi:sine-wave"
@@ -641,6 +669,7 @@ sensor:
 
       - name: Frequency Phase T
         id: frequency_phase_t
+        entity_category: "diagnostic"
         unit_of_measurement: Hz
         accuracy_decimals: 2
         icon: "mdi:sine-wave"
@@ -655,6 +684,7 @@ sensor:
 
       - name: Bulk Voltage Positive
         id: v_bulk_positive
+        entity_category: "diagnostic"
         unit_of_measurement: V
         accuracy_decimals: 2
         icon: "mdi:flash"
@@ -669,6 +699,7 @@ sensor:
 
       - name: Bulk Voltage Negative
         id: v_bulk_negative
+        entity_category: "diagnostic"
         unit_of_measurement: V
         accuracy_decimals: 2
         icon: "mdi:flash"
@@ -683,6 +714,7 @@ sensor:
 
       - name: Temperature Supervisor
         id: temperature_supervisor
+        entity_category: "diagnostic"
         unit_of_measurement: "°C"
         accuracy_decimals: 2
         icon: "mdi:thermometer"
@@ -697,6 +729,7 @@ sensor:
 
       - name: Temperature Alim
         id: temperature_alim
+        entity_category: "diagnostic"
         unit_of_measurement: "°C"
         accuracy_decimals: 2
         icon: "mdi:thermometer"
@@ -711,6 +744,7 @@ sensor:
 
       - name: Temperature Heat Sink
         id: temperature_heat_sink
+        entity_category: "diagnostic"
         unit_of_measurement: "°C"
         accuracy_decimals: 2
         icon: "mdi:thermometer"
@@ -725,6 +759,7 @@ sensor:
 
       - name: Temperature 1
         id: temperature_1
+        entity_category: "diagnostic"
         unit_of_measurement: "°C"
         accuracy_decimals: 2
         icon: "mdi:thermometer"
@@ -739,6 +774,7 @@ sensor:
 
       - name: Temperature 2
         id: temperature_2
+        entity_category: "diagnostic"
         unit_of_measurement: "°C"
         accuracy_decimals: 2
         icon: "mdi:thermometer"
@@ -753,6 +789,7 @@ sensor:
 
       - name: Temperature 3
         id: temperature_3
+        entity_category: "diagnostic"
         unit_of_measurement: "°C"
         accuracy_decimals: 2
         icon: "mdi:thermometer"
@@ -767,6 +804,7 @@ sensor:
 
       - name: Fan Speed 1
         id: fan_speed_1
+        entity_category: "diagnostic"
         unit_of_measurement: RPM
         accuracy_decimals: 0
         icon: "mdi:fan"
@@ -781,6 +819,7 @@ sensor:
 
       - name: Fan Speed 2
         id: fan_speed_2
+        entity_category: "diagnostic"
         unit_of_measurement: RPM
         accuracy_decimals: 0
         icon: "mdi:fan"
@@ -795,6 +834,7 @@ sensor:
 
       - name: Fan Speed 3
         id: fan_speed_3
+        entity_category: "diagnostic"
         unit_of_measurement: RPM
         accuracy_decimals: 0
         icon: "mdi:fan"
@@ -809,6 +849,7 @@ sensor:
 
       - name: Fan Speed 4
         id: fan_speed_4
+        entity_category: "diagnostic"
         unit_of_measurement: RPM
         accuracy_decimals: 0
         icon: "mdi:fan"
@@ -823,6 +864,7 @@ sensor:
 
       - name: Fan Speed 5
         id: fan_speed_5
+        entity_category: "diagnostic"
         unit_of_measurement: RPM
         accuracy_decimals: 0
         icon: "mdi:fan"
@@ -837,6 +879,7 @@ sensor:
 
       - name: Power Saturation Limit
         id: power_saturation_limit
+        entity_category: "diagnostic"
         unit_of_measurement: W
         accuracy_decimals: 0
         icon: "mdi:flash"
@@ -851,6 +894,7 @@ sensor:
 
       - name: Panel Micro Voltage
         id: v_panel_micro
+        entity_category: "diagnostic"
         unit_of_measurement: V
         accuracy_decimals: 2
         icon: "mdi:flash"
@@ -865,6 +909,7 @@ sensor:
 
       - name: Grid Voltage Phase R
         id: grid_voltage_phase_r
+        entity_category: "diagnostic"
         unit_of_measurement: V
         accuracy_decimals: 2
         icon: "mdi:flash"
@@ -879,6 +924,7 @@ sensor:
 
       - name: Grid Voltage Phase S
         id: grid_voltage_phase_s
+        entity_category: "diagnostic"
         unit_of_measurement: V
         accuracy_decimals: 2
         icon: "mdi:flash"
@@ -893,6 +939,7 @@ sensor:
 
       - name: Grid Voltage Phase T
         id: grid_voltage_phase_t
+        entity_category: "diagnostic"
         unit_of_measurement: V
         accuracy_decimals: 2
         icon: "mdi:flash"
@@ -914,4 +961,5 @@ text_sensor:
     text_sensors: 
       #Status
       - name: connection_status
+        entity_category: "diagnostic"
         icon: "mdi:connection"
