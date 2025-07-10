@@ -1,8 +1,7 @@
 #ifndef ABBAurora_h
 #define ABBAurora_h
 #include <Arduino.h>
-#include <ABBAuroraEnums.h>
-#include <Wire.h>
+#include "ABBAuroraEnums.h"
 
 //RS485 control
 #define RS485Transmit HIGH

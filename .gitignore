@@ -1,8 +1,9 @@
 /.esphome/
 **/.pioenvs/
 **/.piolibdeps/
+**/__pycache__/
 **/lib/
 **/src/
 **/platformio.ini
 /secrets.yaml
-/inverter/**
+/example_inverter/**
