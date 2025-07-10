@@ -23,7 +23,6 @@ CONFIG_SCHEMA = cv.Schema({
     cv.Optional('rx_pin'): cv.int_,
     cv.Optional('tx_pin'): cv.int_,
     cv.Optional('tx_control_pin'): cv.int_,
-    cv.Optional('baud'): cv.int_,
     cv.Optional('address'): cv.int_,
 }).extend(cv.COMPONENT_SCHEMA)
 
@@ -39,8 +38,6 @@ async def to_code(config):
         cg.add(var.set_tx_pin(config['tx_pin']))
     if 'tx_control_pin' in config:
         cg.add(var.set_tx_control_pin(config['tx_control_pin']))
-    if 'baud' in config:
-        cg.add(var.set_baud(config['baud']))
     if 'address' in config:
         cg.add(var.set_address(config['address']))
 

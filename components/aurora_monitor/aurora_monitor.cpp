@@ -92,7 +92,6 @@ void AuroraMonitor::dump_config() {
   ESP_LOGCONFIG(TAG, "  RX Pin: %u", this->rx_pin_);
   ESP_LOGCONFIG(TAG, "  TX Pin: %u", this->tx_pin_);
   ESP_LOGCONFIG(TAG, "  TX Control Pin: %u", this->tx_control_pin_);
-  ESP_LOGCONFIG(TAG, "  Baud: %u", this->baud_);
   ESP_LOGCONFIG(TAG, "  Address: %u", this->address_);
 }
 

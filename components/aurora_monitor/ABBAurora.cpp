@@ -18,6 +18,8 @@ void ABBAurora::setup(HardwareSerial &hardwareSerial, byte RXGpioPin, byte TXGpi
     pinMode(TXPinControl, OUTPUT);
     digitalWrite(TXPinControl, LOW);
 
+    pinMode(RXGpioPin, INPUT_PULLUP);
+
     serial = &hardwareSerial;
 #if defined(USE_ESP32)
     serial->begin(19200, SERIAL_8N1, RXGpioPin, TXGpioPin, false, 500);

@@ -28,16 +28,15 @@ logger:
 
 api:
 
-# 1) The Aurora Monitor “hub” itself
+# The Aurora Monitor “hub” itself
 aurora_monitor:
   id: inverter_monitor
   rx_pin: 22
   tx_pin: 21
   tx_control_pin: 26
-  baud: 19200
   address: 2
 
-# 2) DSP / measurement sensors
+# DSP / measurement sensors
 sensor:
   - platform: aurora_monitor
     name: "PV1 Voltage"
@@ -193,7 +192,7 @@ sensor:
     #         topic: "emon/aurora/temperature_inverter"
     #         payload: !lambda 'return to_string(x).c_str();'
 
-  # 3) Cumulative energy sensors
+  # Cumulative energy sensors
   - platform: aurora_monitor
     name: "Energy Today"
     aurora_monitor_id: inverter_monitor
@@ -256,7 +255,7 @@ sensor:
     #         topic: "emon/aurora/total"
     #         payload: !lambda 'return to_string(x).c_str();'
 
-# 4) Text sensors for status/info
+# Text sensors for status/info
 text_sensor:
   - platform: aurora_monitor
     name: "Inverter Connection"

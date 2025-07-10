@@ -48,7 +48,6 @@ class AuroraMonitor : public PollingComponent {
   void set_rx_pin(uint8_t rx) { rx_pin_ = rx; }
   void set_tx_pin(uint8_t tx) { tx_pin_ = tx; }
   void set_tx_control_pin(uint8_t ctrl) { tx_control_pin_ = ctrl; }
-  void set_baud(uint32_t baud) { baud_ = baud; }
   void set_address(uint8_t addr) { address_ = addr; }
 
   // Registration methods
@@ -61,7 +60,6 @@ protected:
   uint8_t rx_pin_{22};
   uint8_t tx_pin_{21};
   uint8_t tx_control_pin_{26};
-  uint32_t baud_{19200};
   uint8_t address_{2};
 
   ABBAurora *inverter_{nullptr};
