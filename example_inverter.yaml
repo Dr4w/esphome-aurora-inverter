@@ -10,7 +10,7 @@ ota:
   platform: esphome
 
 external_components:
-  - source: "components"
+  - source: github://michelsciortino/esphome-aurora-inverter
     components: [aurora_monitor]
 
 wifi:
