@@ -2,6 +2,16 @@
 #include "aurora_monitor.h"
 #include "esphome/core/log.h"
 
+
+#if defined(USE_ESP32)
+#define AURORA_SERIAL Serial2
+#elif defined(USE_ESP8266)
+#define AURORA_SERIAL Serial
+#else
+#error Unsupported device
+#endif
+
+
 namespace esphome {
 namespace aurora_monitor {
 
@@ -29,7 +39,7 @@ void AuroraMonitor::register_text_sensor(text_sensor::TextSensor *ts, INFO_TYPE 
 
 void AuroraMonitor::setup() {
   ESP_LOGD(TAG, "Setting up Aurora Monitor");
-  ABBAurora::setup(Serial2, rx_pin_, tx_pin_, tx_control_pin_);
+  ABBAurora::setup(AURORA_SERIAL, rx_pin_, tx_pin_, tx_control_pin_);
   inverter_ = new ABBAurora(address_);
 }
 
