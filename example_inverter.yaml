@@ -1,0 +1,280 @@
+esphome:
+  name: example_inverter
+
+esp32:
+  board: nodemcu-32s
+  framework:
+    type: arduino
+
+ota:
+  platform: esphome
+
+external_components:
+  - source: github://michelsciortino/esphome-aurora-inverter
+    components: [aurora_monitor]
+
+wifi:
+  ssid: "SSID"
+  password: ""
+
+# mqtt:  # Uncomment to enable MQTT
+#   broker: mqtt.lan
+#   username: mqttuser
+#   password: mqttpass
+
+captive_portal:
+
+logger:
+
+api:
+
+# The Aurora Monitor “hub” itself
+aurora_monitor:
+  id: inverter_monitor
+  rx_pin: 22
+  tx_pin: 21
+  tx_control_pin: 26
+  address: 2
+
+# DSP / measurement sensors
+sensor:
+  - platform: aurora_monitor
+    name: "PV1 Voltage"
+    aurora_monitor_id: inverter_monitor
+    dsp_value_type: V_IN_1
+    unit_of_measurement: V
+    accuracy_decimals: 2
+    device_class: voltage
+    # on_value:
+    #   then:
+    #     - mqtt.publish:
+    #         topic: "emon/aurora/v_in_1"
+    #         payload: !lambda 'return to_string(x).c_str();'
+
+  - platform: aurora_monitor
+    name: "PV2 Voltage"
+    aurora_monitor_id: inverter_monitor
+    dsp_value_type: V_IN_2
+    unit_of_measurement: V
+    accuracy_decimals: 2
+    device_class: voltage
+    # on_value:
+    #   then:
+    #     - mqtt.publish:
+    #         topic: "emon/aurora/v_in_2"
+    #         payload: !lambda 'return to_string(x).c_str();'
+
+  - platform: aurora_monitor
+    name: "PV1 Current"
+    aurora_monitor_id: inverter_monitor
+    dsp_value_type: I_IN_1
+    unit_of_measurement: A
+    accuracy_decimals: 2
+    device_class: current
+    # on_value:
+    #   then:
+    #     - mqtt.publish:
+    #         topic: "emon/aurora/i_in_1"
+    #         payload: !lambda 'return to_string(x).c_str();'
+
+  - platform: aurora_monitor
+    name: "PV2 Current"
+    aurora_monitor_id: inverter_monitor
+    dsp_value_type: I_IN_2
+    unit_of_measurement: A
+    accuracy_decimals: 2
+    device_class: current
+    # on_value:
+    #   then:
+    #     - mqtt.publish:
+    #         topic: "emon/aurora/i_in_2"
+    #         payload: !lambda 'return to_string(x).c_str();'
+
+  - platform: aurora_monitor
+    name: "PV1 Power"
+    aurora_monitor_id: inverter_monitor
+    dsp_value_type: POWER_IN_1
+    unit_of_measurement: W
+    accuracy_decimals: 0
+    device_class: power
+    # on_value:
+    #   then:
+    #     - mqtt.publish:
+    #         topic: "emon/aurora/power_in_1"
+    #         payload: !lambda 'return to_string(x).c_str();'
+
+  - platform: aurora_monitor
+    name: "PV2 Power"
+    aurora_monitor_id: inverter_monitor
+    dsp_value_type: POWER_IN_2
+    unit_of_measurement: W
+    accuracy_decimals: 0
+    device_class: power
+    # on_value:
+    #   then:
+    #     - mqtt.publish:
+    #         topic: "emon/aurora/power_in_2"
+    #         payload: !lambda 'return to_string(x).c_str();'
+
+  - platform: aurora_monitor
+    name: "Peak Power Today"
+    aurora_monitor_id: inverter_monitor
+    dsp_value_type: POWER_PEAK_TODAY
+    unit_of_measurement: W
+    accuracy_decimals: 0
+    device_class: power
+    # on_value:
+    #   then:
+    #     - mqtt.publish:
+    #         topic: "emon/aurora/power_peak_today"
+    #         payload: !lambda 'return to_string(x).c_str();'
+
+  - platform: aurora_monitor
+    name: "Grid Voltage"
+    aurora_monitor_id: inverter_monitor
+    dsp_value_type: GRID_VOLTAGE
+    unit_of_measurement: V
+    accuracy_decimals: 2
+    device_class: voltage
+    # on_value:
+    #   then:
+    #     - mqtt.publish:
+    #         topic: "emon/aurora/grid_voltage"
+    #         payload: !lambda 'return to_string(x).c_str();'
+
+  - platform: aurora_monitor
+    name: "Grid Current"
+    aurora_monitor_id: inverter_monitor
+    dsp_value_type: GRID_CURRENT
+    unit_of_measurement: A
+    accuracy_decimals: 2
+    device_class: current
+    # on_value:
+    #   then:
+    #     - mqtt.publish:
+    #         topic: "emon/aurora/grid_current"
+    #         payload: !lambda 'return to_string(x).c_str();'
+
+  - platform: aurora_monitor
+    name: "Grid Power"
+    aurora_monitor_id: inverter_monitor
+    dsp_value_type: GRID_POWER
+    unit_of_measurement: W
+    accuracy_decimals: 0
+    device_class: power
+    # on_value:
+    #   then:
+    #     - mqtt.publish:
+    #         topic: "emon/aurora/grid_power"
+    #         payload: !lambda 'return to_string(x).c_str();'
+
+  - platform: aurora_monitor
+    name: "Frequency"
+    aurora_monitor_id: inverter_monitor
+    dsp_value_type: FREQUENCY
+    unit_of_measurement: Hz
+    accuracy_decimals: 2
+    # on_value:
+    #   then:
+    #     - mqtt.publish:
+    #         topic: "emon/aurora/frequency"
+    #         payload: !lambda 'return to_string(x).c_str();'
+
+  - platform: aurora_monitor
+    name: "Inverter Temperature"
+    aurora_monitor_id: inverter_monitor
+    dsp_value_type: TEMPERATURE_INVERTER
+    unit_of_measurement: "°C"
+    accuracy_decimals: 2
+    # on_value:
+    #   then:
+    #     - mqtt.publish:
+    #         topic: "emon/aurora/temperature_inverter"
+    #         payload: !lambda 'return to_string(x).c_str();'
+
+  # Cumulative energy sensors
+  - platform: aurora_monitor
+    name: "Energy Today"
+    aurora_monitor_id: inverter_monitor
+    energy_type: CURRENT_DAY
+    unit_of_measurement: "Wh"
+    accuracy_decimals: 0
+    device_class: energy
+    state_class: total_increasing
+    # on_value:
+    #   then:
+    #     - mqtt.publish:
+    #         topic: "emon/aurora/current_day"
+    #         payload: !lambda 'return to_string(x).c_str();'
+
+  - platform: aurora_monitor
+    name: "Energy This Week"
+    aurora_monitor_id: inverter_monitor
+    energy_type: CURRENT_WEEK
+    unit_of_measurement: "Wh"
+    accuracy_decimals: 0
+    # on_value:
+    #   then:
+    #     - mqtt.publish:
+    #         topic: "emon/aurora/current_week"
+    #         payload: !lambda 'return to_string(x).c_str();'
+
+  - platform: aurora_monitor
+    name: "Energy This Month"
+    aurora_monitor_id: inverter_monitor
+    energy_type: CURRENT_MONTH
+    unit_of_measurement: "Wh"
+    accuracy_decimals: 0
+    # on_value:
+    #   then:
+    #     - mqtt.publish:
+    #         topic: "emon/aurora/current_month"
+    #         payload: !lambda 'return to_string(x).c_str();'
+
+  - platform: aurora_monitor
+    name: "Energy This Year"
+    aurora_monitor_id: inverter_monitor
+    energy_type: CURRENT_YEAR
+    unit_of_measurement: "Wh"
+    accuracy_decimals: 0
+    # on_value:
+    #   then:
+    #     - mqtt.publish:
+    #         topic: "emon/aurora/current_year"
+    #         payload: !lambda 'return to_string(x).c_str();'
+
+  - platform: aurora_monitor
+    name: "Energy Total"
+    aurora_monitor_id: inverter_monitor
+    energy_type: TOTAL
+    unit_of_measurement: "Wh"
+    accuracy_decimals: 0
+    # on_value:
+    #   then:
+    #     - mqtt.publish:
+    #         topic: "emon/aurora/total"
+    #         payload: !lambda 'return to_string(x).c_str();'
+
+# Text sensors for status/info
+text_sensor:
+  - platform: aurora_monitor
+    name: "Inverter Connection"
+    aurora_monitor_id: inverter_monitor
+    info_type: CONNECTION_STATUS
+
+  - platform: aurora_monitor
+    name: "System Part Number"
+    aurora_monitor_id: inverter_monitor
+    info_type: SYSTEM_PN
+
+  - platform: aurora_monitor
+    name: "Serial Number"
+    aurora_monitor_id: inverter_monitor
+    info_type: SYSTEM_SERIAL_NUMBER
+
+  - platform: aurora_monitor
+    name: "Firmware Release"
+    aurora_monitor_id: inverter_monitor
+    info_type: FIRMWARE_RELEASE
+
+

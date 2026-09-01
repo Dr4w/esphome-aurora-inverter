@@ -49,7 +49,7 @@ The full guide of the `esphome` ccommand line interface can be found in the [ESP
 > pip3 install esphome
 
 ### Generating and compiling the source code
-> esphome config.yaml compile
+> esphome example_inverter.yaml compile
 
 ### Uploading the binary to the ESP device
-> esphome config.yaml upload
+> esphome example_inverter.yaml upload
