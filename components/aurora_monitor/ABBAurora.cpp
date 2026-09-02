@@ -22,7 +22,7 @@ void ABBAurora::setup(HardwareSerial &hardwareSerial, byte RXGpioPin, byte TXGpi
 
     serial = &hardwareSerial;
 #if defined(USE_ESP32)
-    serial->begin(19200, SERIAL_8N1, RXGpioPin, TXGpioPin, false, 500);
+    serial->begin(19200, SERIAL_8N1, RXGpioPin, TXGpioPin, false, 0);
 #elif defined(USE_ESP8266)
     serial->begin(19200, SERIAL_8N1, SERIAL_FULL);
     if (RXGpioPin == 13 && TXGpioPin == 15) {
@@ -87,7 +87,7 @@ bool ABBAurora::Send(byte address, byte param0, byte param1, byte param2, byte p
     for (int i = 0; i < this->MaxAttempt; i++)
     {
         digitalWrite(TXPinControl, RS485Transmit);
-        delay(50);
+        delay(50); // Pausa per far commutare il chip RS485
 
         if (serial->write(SendData, sizeof(SendData)) != 0)
         {
@@ -96,7 +96,26 @@ bool ABBAurora::Send(byte address, byte param0, byte param1, byte param2, byte p
 
             digitalWrite(TXPinControl, RS485Receive);
 
-            if (serial->readBytes(ReceiveData, sizeof(ReceiveData)) != 0)
+            unsigned long startTime = millis();
+            int bytesRead = 0;
+            int totalBytes = sizeof(ReceiveData);
+
+            // Lettura sicura con timeout di 200ms e anti-Watchdog
+            while ((bytesRead < totalBytes) && (millis() - startTime < 200)) 
+            {
+                if (serial->available() > 0) 
+                {
+                    ReceiveData[bytesRead] = serial->read();
+                    bytesRead++;
+                } 
+                else 
+                {
+                    delay(1); // Fa respirare ESPHome e il WiFi
+                }
+            }
+
+            // Verifica CRC solo se abbiamo tutti i byte
+            if (bytesRead == totalBytes)
             {
                 if ((int)word(ReceiveData[7], ReceiveData[6]) == Crc16(ReceiveData, 0, 6))
                 {
