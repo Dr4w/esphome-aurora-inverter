@@ -55,7 +55,8 @@ void AuroraMonitor::update() {
     switch (type)
     {
     case CONNECTION_STATUS:
-      sensor->publish_state(this->inverter_->SendStatus ? "CONNECTED" : "DISCONNECTED");
+      this->inverter_->ReadState();
+        sensor->publish_state(this->inverter_->ReceiveStatus ? "CONNECTED" : "DISCONNECTED");
       break;
     case SYSTEM_PN:
       if (sensor->get_state().empty() && this->inverter_->ReadSystemPN())
