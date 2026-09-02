@@ -87,7 +87,7 @@ bool ABBAurora::Send(byte address, byte param0, byte param1, byte param2, byte p
     for (int i = 0; i < this->MaxAttempt; i++)
     {
         digitalWrite(TXPinControl, RS485Transmit);
-        delay(50); // Pausa per far commutare il chip RS485
+        delay(10); // Pausa conservativa per RS485
 
         if (serial->write(SendData, sizeof(SendData)) != 0)
         {
@@ -100,8 +100,8 @@ bool ABBAurora::Send(byte address, byte param0, byte param1, byte param2, byte p
             int bytesRead = 0;
             int totalBytes = sizeof(ReceiveData);
 
-            // Lettura sicura con timeout di 200ms e anti-Watchdog
-            while ((bytesRead < totalBytes) && (millis() - startTime < 200)) 
+            // Timeout a 100ms: enorme per l'inverter, ma salva il Watchdog
+            while ((bytesRead < totalBytes) && (millis() - startTime < 100)) 
             {
                 if (serial->available() > 0) 
                 {
