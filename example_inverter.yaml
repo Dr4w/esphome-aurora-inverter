@@ -1,21 +1,29 @@
 esphome:
-  name: example_inverter
+  name: aurora-monitor
+  friendly_name: Aurora Monitor
 
 esp32:
   board: nodemcu-32s
   framework:
     type: arduino
+#   OPTIONAL: If your ESP matches it, you can enable this for better performance. Logs will tell you.
+#    advanced:
+#      minimum_chip_revision: "3.0"
+#      sram1_as_iram: true
 
 ota:
   platform: esphome
 
 external_components:
-  - source: github://michelsciortino/esphome-aurora-inverter
+  - source: github://Dr4w/esphome-aurora-inverter@main
     components: [aurora_monitor]
 
 wifi:
-  ssid: "SSID"
-  password: ""
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: "${friendly_name} Fallback"
+    password: !secret wifi_fallback_password
 
 # mqtt:  # Uncomment to enable MQTT
 #   broker: mqtt.lan
@@ -28,15 +36,13 @@ logger:
 
 api:
 
-# The Aurora Monitor “hub” itself
 aurora_monitor:
   id: inverter_monitor
-  rx_pin: 22
-  tx_pin: 21
+  rx_pin: 17
+  tx_pin: 16
   tx_control_pin: 26
   address: 2
 
-# DSP / measurement sensors
 sensor:
   - platform: aurora_monitor
     name: "PV1 Voltage"
@@ -45,6 +51,7 @@ sensor:
     unit_of_measurement: V
     accuracy_decimals: 2
     device_class: voltage
+    state_class: measurement
     # on_value:
     #   then:
     #     - mqtt.publish:
@@ -58,6 +65,7 @@ sensor:
     unit_of_measurement: V
     accuracy_decimals: 2
     device_class: voltage
+    state_class: measurement
     # on_value:
     #   then:
     #     - mqtt.publish:
@@ -71,6 +79,7 @@ sensor:
     unit_of_measurement: A
     accuracy_decimals: 2
     device_class: current
+    state_class: measurement
     # on_value:
     #   then:
     #     - mqtt.publish:
@@ -84,6 +93,7 @@ sensor:
     unit_of_measurement: A
     accuracy_decimals: 2
     device_class: current
+    state_class: measurement
     # on_value:
     #   then:
     #     - mqtt.publish:
@@ -97,6 +107,7 @@ sensor:
     unit_of_measurement: W
     accuracy_decimals: 0
     device_class: power
+    state_class: measurement
     # on_value:
     #   then:
     #     - mqtt.publish:
@@ -110,6 +121,7 @@ sensor:
     unit_of_measurement: W
     accuracy_decimals: 0
     device_class: power
+    state_class: measurement
     # on_value:
     #   then:
     #     - mqtt.publish:
@@ -123,6 +135,7 @@ sensor:
     unit_of_measurement: W
     accuracy_decimals: 0
     device_class: power
+    state_class: measurement
     # on_value:
     #   then:
     #     - mqtt.publish:
@@ -136,6 +149,7 @@ sensor:
     unit_of_measurement: V
     accuracy_decimals: 2
     device_class: voltage
+    state_class: measurement
     # on_value:
     #   then:
     #     - mqtt.publish:
@@ -149,6 +163,7 @@ sensor:
     unit_of_measurement: A
     accuracy_decimals: 2
     device_class: current
+    state_class: measurement
     # on_value:
     #   then:
     #     - mqtt.publish:
@@ -162,6 +177,7 @@ sensor:
     unit_of_measurement: W
     accuracy_decimals: 0
     device_class: power
+    state_class: measurement
     # on_value:
     #   then:
     #     - mqtt.publish:
@@ -174,6 +190,7 @@ sensor:
     dsp_value_type: FREQUENCY
     unit_of_measurement: Hz
     accuracy_decimals: 2
+    state_class: measurement
     # on_value:
     #   then:
     #     - mqtt.publish:
@@ -185,14 +202,15 @@ sensor:
     aurora_monitor_id: inverter_monitor
     dsp_value_type: TEMPERATURE_INVERTER
     unit_of_measurement: "°C"
-    accuracy_decimals: 2
+    accuracy_decimals: 1
+    device_class: temperature
+    state_class: measurement
     # on_value:
     #   then:
     #     - mqtt.publish:
     #         topic: "emon/aurora/temperature_inverter"
     #         payload: !lambda 'return to_string(x).c_str();'
 
-  # Cumulative energy sensors
   - platform: aurora_monitor
     name: "Energy Today"
     aurora_monitor_id: inverter_monitor
@@ -213,6 +231,8 @@ sensor:
     energy_type: CURRENT_WEEK
     unit_of_measurement: "Wh"
     accuracy_decimals: 0
+    device_class: energy
+    state_class: total_increasing
     # on_value:
     #   then:
     #     - mqtt.publish:
@@ -225,6 +245,8 @@ sensor:
     energy_type: CURRENT_MONTH
     unit_of_measurement: "Wh"
     accuracy_decimals: 0
+    device_class: energy
+    state_class: total_increasing
     # on_value:
     #   then:
     #     - mqtt.publish:
@@ -237,6 +259,8 @@ sensor:
     energy_type: CURRENT_YEAR
     unit_of_measurement: "Wh"
     accuracy_decimals: 0
+    device_class: energy
+    state_class: total_increasing
     # on_value:
     #   then:
     #     - mqtt.publish:
@@ -249,13 +273,14 @@ sensor:
     energy_type: TOTAL
     unit_of_measurement: "Wh"
     accuracy_decimals: 0
+    device_class: energy
+    state_class: total_increasing
     # on_value:
     #   then:
     #     - mqtt.publish:
     #         topic: "emon/aurora/total"
     #         payload: !lambda 'return to_string(x).c_str();'
 
-# Text sensors for status/info
 text_sensor:
   - platform: aurora_monitor
     name: "Inverter Connection"
@@ -276,5 +301,3 @@ text_sensor:
     name: "Firmware Release"
     aurora_monitor_id: inverter_monitor
     info_type: FIRMWARE_RELEASE
-
-
